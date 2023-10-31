@@ -53,12 +53,14 @@ int main(){
     while (true) {
         XNextEvent(display, &event);
 
-        // std::cout << "event type:" << event.type << std::endl;
+        std::cout << "event type:" << event.type << std::endl;
         if (event.type == Expose) {
             XDrawString(display, window, gc, 10, 30, "Hello window", 12);
-        }
-        if (event.type == KeyPress || event.type == ClientMessage) {
+        } else if (event.type == KeyPress || event.type == ClientMessage) {
             break;
+        }else if(event.type == MotionNotify){
+            std::cout << "x : " << event.xmotion.x 
+                << "  y : " << event.xmotion.y << std::endl;
         }
 
     }//end while
